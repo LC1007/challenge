@@ -5,9 +5,7 @@ class Users{
 
     // Select all users
     fetchUsers(req,res){
-        const query = `
-        SELECT userID, firstName, lastName, gender, userDOB, 
-        emailAdd, profileUrl FROM Users;`
+        const query = "SELECT userID, firstName, lastName, gender, userDOB, emailAdd, profileUrl FROM Users;"
 
         db.query(query, (err, results) =>{
             if(err) throw err
