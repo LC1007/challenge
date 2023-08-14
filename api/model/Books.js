@@ -1,1 +1,5 @@
-// Books table
+class Books{
+
+}
+
+module.exports = Books
