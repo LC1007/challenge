@@ -1,1 +1,8 @@
-//  import all models 
+const Users = require('./Users');
+const Orders = require('./Orders');
+const Books = require('./Books');
+const BookAuthors = require('./BookAuthors');
+
+module.exports = {
+    users: new Users()
+}
