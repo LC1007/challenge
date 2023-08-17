@@ -19,10 +19,10 @@ class Users{
     // Select single user
     fetchUser(req, res){
         const query = `SELECT userID, firstName, lastName, gender, userDOB, 
-        emailAdd, profileUrl WHERE userID = ?`
-        const { id } = req.params
+        emailAdd, profileUrl FROM Users WHERE userID = ?`
+        const { userID } = req.params
 
-        db.query(query, [id], (err, result) =>{
+        db.query(query, [userID], (err, result) =>{
             if(err) throw err
             res.json({
                 status: res.statusCode,
@@ -107,17 +107,32 @@ class Users{
     }
 
     // Update user
-    updateUser(req, res){
-        const query = `UPDATE User SET ? WHERE userID = ?`
-        const { id } = req.params
-        const data = req.body
+    // updateUser(req, res){
+    //     const query = `UPDATE User SET ? WHERE userID = ?`
+    //     const { id } = req.params
+    //     const data = req.body
 
-        db.query(query, [data, id], (err) =>{
+    //     db.query(query, [data, id], (err) =>{
+    //         if(err) throw err
+    //         res.json({
+    //             status: res.statusCode,
+    //             msg: 'User has been updated'
+    //         })
+    //     })
+    // }
+
+    updateUser(req, res){
+        const data = req.body
+        if(data.userPass){
+            data.userPass = hashSync(data.userPass, 15)
+        }
+
+        const query = `UPDATE Users
+        SET ?
+        WHERE userID = ?`
+
+        db.query(query, [data, req.params.id], (err) =>{
             if(err) throw err
-            res.json({
-                status: res.statusCode,
-                msg: 'User has been updated'
-            })
         })
     }
 

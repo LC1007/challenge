@@ -39,24 +39,24 @@ class Books{
         })
     }
 
-    addBookToCart(req, res){
-        const query = `INSERT INTO Orders SET ?`
-        const { orderID, userID, bookID, orderDate } = req.body
-        const order = {
-            orderID: orderID,
-            userID: userID,
-            bookID: bookID,
-            orderDate: orderDate
-        }        
+    // addBookToCart(req, res){
+    //     const query = `INSERT INTO Orders SET ?`
+    //     const { orderID, userID, bookID, orderDate } = req.body
+    //     const order = {
+    //         orderID: orderID,
+    //         userID: userID,
+    //         bookID: bookID,
+    //         orderDate: orderDate
+    //     }        
 
-        db.query(query, [order], (err) =>{
-            if(err) throw err
-            res.json({
-                status: res.statusCode,
-                msg: "Book has been added to cart"
-            })
-        })
-    }
+    //     db.query(query, [order], (err) =>{
+    //         if(err) throw err
+    //         res.json({
+    //             status: res.statusCode,
+    //             msg: "Book has been added to cart"
+    //         })
+    //     })
+    // }
 
     deleteBook(req, res){
         const query = `DELETE FROM Books WHERE bookID = ?`
