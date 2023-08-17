@@ -1,3 +1,4 @@
+const { hashSync } = require('bcrypt');
 const db = require('../config');
 
 class Orders{
@@ -56,10 +57,11 @@ class Orders{
     }
 
     registerOrder(req, res){
-        const query = `INSERT INTO Orders SET ?;`
-        const data = req.body
+        const query = `INSERT INTO Orders (orderID, userID, bookID, orderDate) VALUES
+        (${req.params.orderID},${req.params.userID},${req.params.bookID}, ?);`
+        const orderDate = req.body
 
-        db.query(query, [data], (err) =>{
+        db.query(query, [orderDate], (err) =>{
             if(err) throw err
             res.json({
                 status: res.statusCode,
@@ -70,3 +72,9 @@ class Orders{
 }
 
 module.exports = Orders
+
+// User Table - userID - PK
+// Orders Table - prodID - FK
+// Products Table - ProdID - PK linked to Orders table (FK - prodID)
+
+// Use the keyword USING not ON
